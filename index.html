@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy New Year Ashmita ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  margin:0;
+  overflow:hidden;
+  font-family:'Segoe UI',sans-serif;
+  background:linear-gradient(180deg,#2b0a1f,#5a1434);
+  color:white;
+  text-align:center;
+}
+
+/* Clouds */
+.cloud{
+  position:absolute;
+  top:5vh;
+  width:120px;
+  height:50px;
+  background:#eee;
+  border-radius:50px;
+  opacity:0.8;
+}
+.cloud::before,.cloud::after{
+  content:"";
+  position:absolute;
+  background:#eee;
+  width:60px;
+  height:60px;
+  border-radius:50%;
+  top:-30px;
+}
+.cloud::before{left:15px;}
+.cloud::after{right:15px;}
+
+/* Card */
+.card{
+  position:relative;
+  z-index:10;
+  max-width:360px;
+  margin:auto;
+  top:18vh;
+  background:rgba(120,20,60,0.85);
+  padding:25px;
+  border-radius:20px;
+  box-shadow:0 0 25px rgba(0,0,0,0.6);
+  animation:fadeIn 2s;
+}
+
+h1{
+  animation:glow 2s infinite alternate;
+}
+
+button{
+  background:white;
+  color:#c2185b;
+  border:none;
+  padding:12px 22px;
+  border-radius:25px;
+  font-size:16px;
+  margin:8px;
+  cursor:pointer;
+}
+
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes glow{from{text-shadow:0 0 5px #fff}to{text-shadow:0 0 15px #ff4d6d}}
+
+/* Rain */
+.rain{
+  position:absolute;
+  width:2px;
+  height:80px;
+  background:rgba(255,255,255,0.5);
+  animation:rain 2s linear infinite;
+}
+@keyframes rain{to{transform:translateY(120vh)}}
+
+/* Hearts / Roses */
+.fall{
+  position:absolute;
+  font-size:22px;
+  animation:fall 8s linear infinite;
+}
+@keyframes fall{
+  from{transform:translateY(-10vh);opacity:1}
+  to{transform:translateY(120vh);opacity:0}
+}
+
+/* Surprise Box */
+.box{
+  width:120px;
+  height:120px;
+  background:#ff4d6d;
+  margin:20px auto;
+  border-radius:15px;
+  position:relative;
+  cursor:pointer;
+  animation:shake 1s infinite;
+}
+@keyframes shake{
+  0%,100%{transform:rotate(0deg)}
+  50%{transform:rotate(3deg)}
+}
+
+.pop{
+  position:absolute;
+  font-size:24px;
+  animation:pop 2s ease-out forwards;
+}
+@keyframes pop{
+  from{transform:scale(0);opacity:1}
+  to{transform:translateY(-80px) scale(1.5);opacity:0}
+}
+</style>
+</head>
+
+<body>
+
+<!-- Clouds -->
+<div class="cloud" style="left:10%"></div>
+<div class="cloud" style="left:40%"></div>
+<div class="cloud" style="left:70%"></div>
+
+<div class="card" id="content">
+  <h1>✨ Happy New Year ✨</h1>
+  <p><b>Ashmita ❤️ Kushay</b></p>
+  <p>Is naye saal me ek chhota sa pyaara gift… 💕</p>
+  <button onclick="next()">Tap to Open 💖</button>
+</div>
+
+<script>
+let step=0;
+const content=document.getElementById("content");
+
+const questions=[
+["Kya main tumhari life ka special part hoon? ❤️","Haan 😘","Bilkul 💕"],
+["Kya tum mere saath apni har khushi or har problem share karogi? 🌸","Hamesha 🤞","Promise ❤️"],
+["Kya main tumhe roz aur pyaar kar sakta hoon? 🥹","Obviously 💖","Of course 😍"],
+["Jab mai tumse milne aunga mujhe cheese momo khilogi? 🥹","Mujhe cheese momo ni psnd 😭","Yes baby khila dungi ❤️"],
+["Last one… Kya tum meri ho? 🌹","Sirf or sirf tumhari 🤭","Ye bhi koi puchne wali baat h 😘♥️"]
+];
+
+function next(){
+  step++;
+  if(step<=5){
+    content.innerHTML=`
+    <h2>Question ${step}</h2>
+    <p>${questions[step-1][0]}</p>
+    <button onclick="next()">${questions[step-1][1]}</button>
+    <button onclick="next()">${questions[step-1][2]}</button>`;
+  }else{
+    content.innerHTML=`
+    <h2>🎁 Surprise Box</h2>
+    <div class="box" onclick="openBox()"></div>
+    <p>Tap the box 🤭</p>`;
+  }
+}
+
+function openBox(){
+  content.innerHTML=`<h2>I LOVE YOU SOOO MUCHHH❤️</h2><p>— Tumhara Kushay</p>`;
+  for(let i=0;i<12;i++){
+    let h=document.createElement("div");
+    h.className="pop";
+    h.innerHTML="❤️";
+    h.style.left=Math.random()*100+"px";
+    h.style.top="150px";
+    content.appendChild(h);
+  }
+}
+
+/* Rain */
+for(let i=0;i<40;i++){
+ let r=document.createElement("div");
+ r.className="rain";
+ r.style.left=Math.random()*100+"vw";
+ r.style.animationDuration=1+Math.random()*2+"s";
+ document.body.appendChild(r);
+}
+
+/* Hearts / Roses rain */
+["❤️","🌹"].forEach(sym=>{
+ for(let i=0;i<15;i++){
+  let e=document.createElement("div");
+  e.className="fall";
+  e.innerHTML=sym;
+  e.style.left=Math.random()*100+"vw";
+  e.style.animationDuration=5+Math.random()*5+"s";
+  document.body.appendChild(e);
+ }
+});
+</script>
+
+</body>
+</html>
